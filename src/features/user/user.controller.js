@@ -20,4 +20,13 @@ export default class UserController {
             return res.statusCode(response.code).json({});
         }
     }
+    async signIn(req,res,next){
+        let credentials = req.body;
+        let response = this.respository.signIn(credentials);
+        if(response.success){
+            return res.statusCode(response.code).json({});
+        } else {
+            return res.statusCode(response.code).json({});
+        }
+    }
 }

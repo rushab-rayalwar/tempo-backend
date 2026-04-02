@@ -1,5 +1,14 @@
+//third-party imports
 import express from "express";
 
-const userRouter = express.Router();
+//local imports
+import UserController from "./user.controller.js";
 
-userRouter.post("/signUp",(req,res,next)=>);
+const userRouter = express.Router();
+const userController = new UserController();
+
+//GET
+userRouter.get("/login",(req,res,next)=>userController.signUp(req,res,next));
+
+//POST
+userRouter.post("/register",(req,res,next)=>userController.signUp(req,res,next));
