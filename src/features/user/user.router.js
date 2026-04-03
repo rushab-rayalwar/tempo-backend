@@ -12,3 +12,6 @@ userRouter.get("/login",(req,res,next)=>userController.signUp(req,res,next));
 
 //POST
 userRouter.post("/register",(req,res,next)=>userController.signUp(req,res,next));
+
+
+export default userRouter;
