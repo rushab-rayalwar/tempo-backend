@@ -7,8 +7,8 @@ import UserController from "./user.controller.js";
 const userRouter = express.Router();
 const userController = new UserController();
 
-//GET
-userRouter.get("/login",(req,res,next)=>userController.signUp(req,res,next));
+//POST
+userRouter.post("/login",(req,res,next)=>userController.signIn(req,res,next));
 
 //POST
 userRouter.post("/register",(req,res,next)=>userController.signUp(req,res,next));

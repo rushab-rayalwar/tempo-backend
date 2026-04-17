@@ -1,5 +1,5 @@
 // third party imports
-
+import jwt from "jsonwebtoken";
 
 // local imports
 import UserRepository from "./user.repository.js";
@@ -13,20 +13,22 @@ export default class UserController {
 
     async signUp(req,res,next){
         let userData = req.body;
-        let response = this.respository.signUp(userData);
+        let response = await this.respository.signUp(userData);
         if(response.success){
-            return res.statusCode(response.code).json({success:true, message:response.message, data:response.data});
+            return res.status(response.code).json({success:true, message:response.message, data:response.data});
         } else {
-            return res.statusCode(response.code).json({success:false, errors:response.errors});
+            return res.status(response.code).json({success:false, errors:response.errors});
         }
     }
     async signIn(req,res,next){
         let credentials = req.body;
-        let response = this.respository.signIn(credentials);
+        let response = await this.respository.signIn(credentials);
         if(response.success){
-            return res.statusCode(response.code).json({success:true, message:(await response).message, data:response.data});
+            let token = jwt.sign({_id:response.data._id, email:response.data.email, name:response.data.name}, process.env.JWT_SECRET, {expiresIn:"1h"});
+            response.data.token = token;
+            return res.status(response.code).json({success:true, message:response.message, data:response.data});
         } else {
-            return res.statusCode(response.code).json({success:false, errors:response.errors});
+            return res.status(response.code).json({success:false, errors:response.errors});
         }
     }
-}
+} 

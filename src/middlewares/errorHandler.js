@@ -1,7 +1,7 @@
 import logger from "../config/winston.config.js";
 
-export class ApplicationError extends Error{
-    constructor(message, statusCode){
+export class ApplicationError extends Error {
+    constructor(message, statusCode) {
         super(message);
 
         this.statusCode = statusCode;
@@ -9,7 +9,7 @@ export class ApplicationError extends Error{
     }
 }
 
-export function errorHandlerMiddleware(error, req, res, next){
+export function errorHandlerMiddleware(error, req, res, next) {
     logger.error(error.message);
-    res.statusCode(error.statusCode).json({success:false, errors:["Something went wrong!"]});
+    res.status(error.statusCode).json({ success: false, errors: ["Something went wrong!"] });
 }
