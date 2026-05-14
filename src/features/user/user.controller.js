@@ -26,7 +26,7 @@ export default class UserController {
         if(response.success){
             let token = jwt.sign({_id:response.data._id, email:response.data.email, name:response.data.name}, process.env.JWT_SECRET, {expiresIn:"1h"});
             response.data.token = token;
-            return res.status(response.code).json({success:true, message:response.message, data:response.data});
+            return res.cookie("jwt", token, {maxAge: 1*60*60*1000, httpOnly: true}).status(response.code).json({success:true, message:response.message, data:response.data});
         } else {
             return res.status(response.code).json({success:false, errors:response.errors});
         }

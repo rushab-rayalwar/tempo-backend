@@ -24,7 +24,7 @@ export default class UserRepository {
             let passwordRegex =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};:'",.<>/?\\|`~]).{8,}$/; // NOTE THIS : 
             let passwordIsValid = passwordRegex.test(userData.password);
             if(!passwordIsValid){
-                return {success:false, code:400, errors:["Password must be at least 5 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character."]};
+                return {success:false, code:400, errors:["Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character."]};
             }
 
             // validate email

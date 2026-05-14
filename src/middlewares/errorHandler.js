@@ -10,6 +10,7 @@ export class ApplicationError extends Error {
 }
 
 export function errorHandlerMiddleware(error, req, res, next) {
+    console.log("Error", error);
     logger.error(error.message);
     res.status(error.statusCode).json({ success: false, errors: ["Something went wrong!"] });
 }
